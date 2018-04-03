@@ -24,8 +24,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
         HttpSession session=request.getSession();
-        String action=request.getParameter("action");
-        if("login".equals(action)){
+
             String username=request.getParameter("username");
             String password=request.getParameter("password");
             CarDao cardao=new CarDao();
@@ -42,18 +41,6 @@ public class LoginServlet extends HttpServlet {
             out.println(jo.toString());
             out.flush();
             out.close();
-        }else if("logout".equals(action)){
-            if(session.getAttribute("username")!=null){
-                session.removeAttribute("username");
-                session.invalidate();
-                response.sendRedirect("index.jsp");
-            }
-        }else{
-            response.sendRedirect("index.jsp");
-        }
-
-        out.flush();
-        out.close();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
