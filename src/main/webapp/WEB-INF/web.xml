@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID" version="3.1">
+  <display-name>Java Web</display-name>
+  <servlet>
+    <servlet-name>CarServlet</servlet-name>
+    <servlet-class>com.javaweb.servlet.CarServlet</servlet-class>
+  </servlet>
+  <!--映射servlet -->
+  <servlet-mapping>
+    <servlet-name>CarServlet</servlet-name>
+    <!--浏览器地址栏，URL表单 -->
+    <url-pattern>/CarServlet</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+  <servlet-name>ContactServlet</servlet-name>
+  <servlet-class>com.javaweb.servlet.ContactServlet</servlet-class>
+  <!--启动服务器时优先加载：load-on-startup>1</load-on-startup-->
+</servlet>
+  <!--映射servlet -->
+  <servlet-mapping>
+    <servlet-name>ContactServlet</servlet-name>
+    <!--浏览器地址栏，URL表单 -->
+    <url-pattern>/ContactServlet</url-pattern>
+  </servlet-mapping>
+
+
+
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.javaweb.servlet.LoginServlet</servlet-class>
+    <!--启动服务器时优先加载：load-on-startup>1</load-on-startup-->
+  </servlet>
+  <!--映射servlet -->
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <!--浏览器地址栏，URL表单 -->
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+
+
+
+  <!--配置监听器-->
+  <listener>
+    <listener-class>com.javaweb.listener.OnlineListener</listener-class>
+  </listener>
+
+
+
+
+  <!--配置过滤器-->
+  <filter>
+    <filter-name>CharacterFilter</filter-name>
+    <filter-class>com.javaweb.filter.CharacterFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CharacterFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+</web-app>
