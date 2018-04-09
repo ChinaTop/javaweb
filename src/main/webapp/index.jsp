@@ -75,9 +75,10 @@
                 data:{username:username,password:password},
                 dataType:"json",
                 success:function(user){
+                    console.log(user,'.......')
                     if(user&&user.id){
                         localStorage.setItem("username",user.name)
-                        localStorage.setItem("crreateTime",user.createDate)
+                        localStorage.setItem("createDate",user.createDate)
                         location.href="main.html"
                     }else{
                         layer.alter(user.message)

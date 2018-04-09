@@ -12,6 +12,30 @@ public class CarDao {
     private PreparedStatement ps;
     private ResultSet rs;
 
+    public List<Car> find(){
+        List<Car> cars=new ArrayList<Car>();
+        try {
+            conn = DBUtil.openConnection();
+            String sql = "SELECT id,name,price,createdate FROM car WHERE 1=1 ";
+            ps = conn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                Car car = new Car();
+                car.setId(rs.getInt("id")); // 根据字段索引获取值
+                car.setName(rs.getString("name")); // 根据字段名获取值
+                car.setPrice(rs.getDouble("price"));
+                car.setCreateDate(rs.getDate("createdate"));
+                cars.add(car);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(conn, ps, rs);
+        }
+        return cars;
+    }
+
+
     public Car login(String username,String password) {
         Car car = new Car();
         try {

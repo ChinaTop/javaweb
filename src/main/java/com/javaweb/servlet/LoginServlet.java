@@ -1,7 +1,5 @@
 package com.javaweb.servlet;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializer;
 import com.javaweb.dao.CarDao;
 import com.javaweb.pojo.Car;
 import net.sf.json.JSONObject;
@@ -29,10 +27,11 @@ public class LoginServlet extends HttpServlet {
             String password=request.getParameter("password");
             CarDao cardao=new CarDao();
             Car user= cardao.login(username,password);
+            System.out.println(user.getCreateDate());
             JSONObject jo=new JSONObject();
             if(user!=null){
                 JsonConfig jsonConfig=new JsonConfig();
-                jsonConfig.registerJsonValueProcessor(Date.class,new JsDateJsonValueProcessor());
+                jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
                 jo= (JSONObject) JSONSerializer.toJSON(user,jsonConfig);
             }else{
                 jo.put("code",400);
